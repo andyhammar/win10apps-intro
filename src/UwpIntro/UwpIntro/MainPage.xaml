@@ -1,13 +1,21 @@
 ﻿<Page
-    x:Class="UwpIntro.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UwpIntro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:ViewModels="using:UwpIntro.ViewModels"
+    x:Class="UwpIntro.MainPage"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance ViewModels:AppointmentVm, IsDesignTimeCreatable=True}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <StackPanel Orientation="Vertical" Margin="20">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="skapa påminnelse"/>
+            <Button x:Name="button" Content="Öppna" Click="button_Click"/>
+            <DatePicker HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Date="{Binding DateTime, Mode=TwoWay}" DateChanged="DatePicker_DateChanged"/>
+            <TextBlock Text="{Binding DateTime}"/>
+            <CalendarView x:Name="_calendarView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False"/>
+        </StackPanel>
+    </RelativePanel>
 </Page>

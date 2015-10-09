@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UwpIntro.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,19 @@ namespace UwpIntro
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = new AppointmentVm();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            _calendarView.SelectedDates.Clear();
+            _calendarView.SelectedDates.Add(e.NewDate);
+
         }
     }
 }
