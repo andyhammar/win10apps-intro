@@ -10,12 +10,32 @@
     d:DataContext="{d:DesignInstance ViewModels:AppointmentVm, IsDesignTimeCreatable=True}">
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-        <StackPanel Orientation="Vertical" Margin="20">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ViewSizes">
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="_calendarView.(RelativePanel.Below)" Value="datePickerStackPanel"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="_calendarView.(RelativePanel.RightOf)" Value="datePickerStackPanel"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel x:Name="datePickerStackPanel" Orientation="Vertical" Margin="10">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="skapa påminnelse"/>
             <Button x:Name="button" Content="Öppna" Click="button_Click"/>
             <DatePicker HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Date="{Binding DateTime, Mode=TwoWay}" DateChanged="DatePicker_DateChanged"/>
             <TextBlock Text="{Binding DateTime}"/>
-            <CalendarView x:Name="_calendarView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False"/>
         </StackPanel>
+        <CalendarView x:Name="_calendarView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False" Margin="10" d:LayoutOverrides="Height, TopPosition, BottomPosition"/>
     </RelativePanel>
 </Page>
